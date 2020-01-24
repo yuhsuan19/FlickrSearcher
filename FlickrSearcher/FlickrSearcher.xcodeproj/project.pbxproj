@@ -10,7 +10,6 @@
 		C2AF0BE923DB46EA00238E37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BE823DB46EA00238E37 /* AppDelegate.swift */; };
 		C2AF0BEB23DB46EA00238E37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BEA23DB46EA00238E37 /* SceneDelegate.swift */; };
 		C2AF0BED23DB46EA00238E37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BEC23DB46EA00238E37 /* ViewController.swift */; };
-		C2AF0BF023DB46EA00238E37 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2AF0BEE23DB46EA00238E37 /* Main.storyboard */; };
 		C2AF0BF223DB46EC00238E37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2AF0BF123DB46EC00238E37 /* Assets.xcassets */; };
 		C2AF0BF523DB46EC00238E37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2AF0BF323DB46EC00238E37 /* LaunchScreen.storyboard */; };
 		E7E9F1B07D3D61E33B35DD5E /* Pods_FlickrSearcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13F3BA490307F18D3AA4BAD7 /* Pods_FlickrSearcher.framework */; };
@@ -24,7 +23,6 @@
 		C2AF0BE823DB46EA00238E37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2AF0BEA23DB46EA00238E37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C2AF0BEC23DB46EA00238E37 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C2AF0BEF23DB46EA00238E37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C2AF0BF123DB46EC00238E37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C2AF0BF423DB46EC00238E37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C2AF0BF623DB46EC00238E37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -48,7 +46,6 @@
 				4F32D06CE87BB3DDB9FDB5A0 /* Pods-FlickrSearcher.debug.xcconfig */,
 				40BA24055382348D1011FD5B /* Pods-FlickrSearcher.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -76,7 +73,6 @@
 				C2AF0BE823DB46EA00238E37 /* AppDelegate.swift */,
 				C2AF0BEA23DB46EA00238E37 /* SceneDelegate.swift */,
 				C2AF0BEC23DB46EA00238E37 /* ViewController.swift */,
-				C2AF0BEE23DB46EA00238E37 /* Main.storyboard */,
 				C2AF0BF123DB46EC00238E37 /* Assets.xcassets */,
 				C2AF0BF323DB46EC00238E37 /* LaunchScreen.storyboard */,
 				C2AF0BF623DB46EC00238E37 /* Info.plist */,
@@ -153,7 +149,6 @@
 			files = (
 				C2AF0BF523DB46EC00238E37 /* LaunchScreen.storyboard in Resources */,
 				C2AF0BF223DB46EC00238E37 /* Assets.xcassets in Resources */,
-				C2AF0BF023DB46EA00238E37 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,14 +193,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C2AF0BEE23DB46EA00238E37 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C2AF0BEF23DB46EA00238E37 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		C2AF0BF323DB46EC00238E37 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
