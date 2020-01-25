@@ -9,9 +9,14 @@
 /* Begin PBXBuildFile section */
 		C2AF0BE923DB46EA00238E37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BE823DB46EA00238E37 /* AppDelegate.swift */; };
 		C2AF0BEB23DB46EA00238E37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BEA23DB46EA00238E37 /* SceneDelegate.swift */; };
-		C2AF0BED23DB46EA00238E37 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BEC23DB46EA00238E37 /* ViewController.swift */; };
 		C2AF0BF223DB46EC00238E37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2AF0BF123DB46EC00238E37 /* Assets.xcassets */; };
 		C2AF0BF523DB46EC00238E37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2AF0BF323DB46EC00238E37 /* LaunchScreen.storyboard */; };
+		C2AF0C0023DC8F9200238E37 /* AppTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BFF23DC8F9200238E37 /* AppTabBarController.swift */; };
+		C2AF0C0823DC905300238E37 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0C0223DC905300238E37 /* SearchPresenter.swift */; };
+		C2AF0C0A23DC905300238E37 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0C0423DC905300238E37 /* SearchRouter.swift */; };
+		C2AF0C0B23DC905300238E37 /* SearchModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0C0523DC905300238E37 /* SearchModels.swift */; };
+		C2AF0C0C23DC905300238E37 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0C0623DC905300238E37 /* SearchViewController.swift */; };
+		C2AF0C0D23DC905300238E37 /* SearchInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0C0723DC905300238E37 /* SearchInteractor.swift */; };
 		E7E9F1B07D3D61E33B35DD5E /* Pods_FlickrSearcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13F3BA490307F18D3AA4BAD7 /* Pods_FlickrSearcher.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,10 +27,15 @@
 		C2AF0BE523DB46EA00238E37 /* FlickrSearcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSearcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2AF0BE823DB46EA00238E37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2AF0BEA23DB46EA00238E37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C2AF0BEC23DB46EA00238E37 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C2AF0BF123DB46EC00238E37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C2AF0BF423DB46EC00238E37 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C2AF0BF623DB46EC00238E37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2AF0BFF23DC8F9200238E37 /* AppTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarController.swift; sourceTree = "<group>"; };
+		C2AF0C0223DC905300238E37 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		C2AF0C0423DC905300238E37 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
+		C2AF0C0523DC905300238E37 /* SearchModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModels.swift; sourceTree = "<group>"; };
+		C2AF0C0623DC905300238E37 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C2AF0C0723DC905300238E37 /* SearchInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,12 +82,33 @@
 			children = (
 				C2AF0BE823DB46EA00238E37 /* AppDelegate.swift */,
 				C2AF0BEA23DB46EA00238E37 /* SceneDelegate.swift */,
-				C2AF0BEC23DB46EA00238E37 /* ViewController.swift */,
+				C2AF0BFF23DC8F9200238E37 /* AppTabBarController.swift */,
+				C2AF0BFC23DBE86800238E37 /* Scenes */,
 				C2AF0BF123DB46EC00238E37 /* Assets.xcassets */,
 				C2AF0BF323DB46EC00238E37 /* LaunchScreen.storyboard */,
 				C2AF0BF623DB46EC00238E37 /* Info.plist */,
 			);
 			path = FlickrSearcher;
+			sourceTree = "<group>";
+		};
+		C2AF0BFC23DBE86800238E37 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				C2AF0C0123DC903200238E37 /* Search */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		C2AF0C0123DC903200238E37 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				C2AF0C0223DC905300238E37 /* SearchPresenter.swift */,
+				C2AF0C0423DC905300238E37 /* SearchRouter.swift */,
+				C2AF0C0523DC905300238E37 /* SearchModels.swift */,
+				C2AF0C0623DC905300238E37 /* SearchViewController.swift */,
+				C2AF0C0723DC905300238E37 /* SearchInteractor.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		E2573BB27146CE72683BE040 /* Frameworks */ = {
@@ -184,8 +215,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2AF0BED23DB46EA00238E37 /* ViewController.swift in Sources */,
+				C2AF0C0B23DC905300238E37 /* SearchModels.swift in Sources */,
+				C2AF0C0A23DC905300238E37 /* SearchRouter.swift in Sources */,
+				C2AF0C0C23DC905300238E37 /* SearchViewController.swift in Sources */,
+				C2AF0C0D23DC905300238E37 /* SearchInteractor.swift in Sources */,
+				C2AF0C0023DC8F9200238E37 /* AppTabBarController.swift in Sources */,
 				C2AF0BE923DB46EA00238E37 /* AppDelegate.swift in Sources */,
+				C2AF0C0823DC905300238E37 /* SearchPresenter.swift in Sources */,
 				C2AF0BEB23DB46EA00238E37 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
