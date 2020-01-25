@@ -18,6 +18,30 @@ protocol SearchDisplayLogic: class {
 class SearchViewController: UIViewController, SearchDisplayLogic {
     var interactor: SearchBusinessLogic?
     var router: (NSObjectProtocol & SearchRoutingLogic & SearchDataPassing)?
+    
+    // MARK: User interface elements
+    lazy var keyWordTextField: UITextField = {
+        let textField = UITextField(frame: .zero)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = UIColor.systemGray.withAlphaComponent(0.3)
+        textField.textAlignment = .center
+        return textField
+    }()
+    
+    lazy var pageCapacityTextField: UITextField = {
+        let textField = UITextField(frame: .zero)
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.backgroundColor = UIColor.systemGray.withAlphaComponent(0.3)
+        textField.textAlignment = .center
+        return textField
+    }()
+    
+    lazy var searchButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemBlue
+        return button
+    }()
 
     // MARK: Object lifecycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -48,6 +72,25 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAndLayoutViews()
+        
+        let stackView = UIStackView(frame: .zero)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .fill
+        stackView.axis = .vertical
+        stackView.distribution = .equalSpacing
+        
+        view.addSubview(stackView)
+        stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
+        stackView.heightAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.8).isActive = true
+        
+        stackView.addArrangedSubview(keyWordTextField)
+        keyWordTextField.heightAnchor.constraint(equalTo: keyWordTextField.widthAnchor, multiplier: 0.18).isActive = true
+        stackView.addArrangedSubview(pageCapacityTextField)
+        pageCapacityTextField.heightAnchor.constraint(equalTo: pageCapacityTextField.widthAnchor, multiplier: 0.18).isActive = true
+        stackView.addArrangedSubview(searchButton)
+        searchButton.heightAnchor.constraint(equalTo: searchButton.widthAnchor ,multiplier: 0.2).isActive = true
     }
     
     private func setUpAndLayoutViews() {
