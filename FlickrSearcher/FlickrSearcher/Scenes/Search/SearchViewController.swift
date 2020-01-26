@@ -23,23 +23,33 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
     lazy var keyWordTextField: UITextField = {
         let textField = UITextField(frame: .zero)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.backgroundColor = UIColor.systemGray.withAlphaComponent(0.3)
+        textField.delegate = self
+        textField.backgroundColor = UIColor.systemGray.withAlphaComponent(0.15)
+        textField.layer.cornerRadius = 3
         textField.textAlignment = .center
+        textField.placeholder = "欲搜尋關鍵字"
         return textField
     }()
     
     lazy var pageCapacityTextField: UITextField = {
         let textField = UITextField(frame: .zero)
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.backgroundColor = UIColor.systemGray.withAlphaComponent(0.3)
+        textField.delegate = self
+        textField.backgroundColor = UIColor.systemGray.withAlphaComponent(0.15)
+        textField.layer.cornerRadius = 3
         textField.textAlignment = .center
+        textField.placeholder = "每頁呈現數量"
+        textField.keyboardType = .numberPad
         return textField
     }()
     
-    lazy var searchButton: UIButton = {
+    @objc lazy var searchButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemBlue
+        button.setTitle("搜尋", for: .normal)
+        button.addTarget(self, action: #selector(searchButtonDidTapped), for: .touchUpInside)
+        button.backgroundColor = .systemGray
+        button.isEnabled = false
         return button
     }()
 
@@ -54,6 +64,10 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
         setup()
     }
   
+    deinit {
+        removeObserver(self, forKeyPath: #keyPath(searchButton.isEnabled), context: nil)
+    }
+    
     // MARK: Setup
     private func setup() {
         let viewController = self
@@ -83,20 +97,68 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
         stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7).isActive = true
-        stackView.heightAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.8).isActive = true
+        stackView.heightAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.9).isActive = true
         
         stackView.addArrangedSubview(keyWordTextField)
-        keyWordTextField.heightAnchor.constraint(equalTo: keyWordTextField.widthAnchor, multiplier: 0.18).isActive = true
+        keyWordTextField.heightAnchor.constraint(equalTo: keyWordTextField.widthAnchor, multiplier: 0.16).isActive = true
         stackView.addArrangedSubview(pageCapacityTextField)
-        pageCapacityTextField.heightAnchor.constraint(equalTo: pageCapacityTextField.widthAnchor, multiplier: 0.18).isActive = true
+        pageCapacityTextField.heightAnchor.constraint(equalTo: pageCapacityTextField.widthAnchor, multiplier: 0.16).isActive = true
         stackView.addArrangedSubview(searchButton)
         searchButton.heightAnchor.constraint(equalTo: searchButton.widthAnchor ,multiplier: 0.2).isActive = true
+        addObserver(self, forKeyPath: #keyPath(searchButton.isEnabled), options: [.new], context: nil)
     }
     
     private func setUpAndLayoutViews() {
-        title = "Search"
+        title = "輸入搜尋"
         view.backgroundColor = .systemBackground
+    }
+    
+    // MARK: User interaction action
+    @objc func searchButtonDidTapped() {
+        print("search")
     }
   
     // MARK: Displaying logics
+    
+}
+
+// MARK: UITextFieldDelegate
+extension SearchViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        searchButton.isEnabled = false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case keyWordTextField:
+            pageCapacityTextField.becomeFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if (keyWordTextField.text?.isEmpty ?? true) || (pageCapacityTextField.text?.isEmpty ?? true) {
+            searchButton.isEnabled = false
+        } else {
+            searchButton.isEnabled = true
+        }
+    }
+}
+
+// MARK: Keypath observation
+extension SearchViewController {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        switch keyPath {
+        case #keyPath(searchButton.isEnabled):
+            searchButton.backgroundColor = searchButton.isEnabled ? .systemBlue : .systemGray
+        default:
+            break
+        }
+    }
 }
