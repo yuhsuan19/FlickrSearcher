@@ -6,5 +6,5 @@ target 'FlickrSearcher' do
   use_frameworks!
 
   # Pods for FlickrSearcher
-
+  pod 'Alamofire'
 end
