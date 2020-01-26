@@ -86,6 +86,12 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAndLayoutViews()
+    }
+    
+    private func setUpAndLayoutViews() {
+        title = "輸入搜尋"
+        view.backgroundColor = .systemBackground
+        navigationController?.tabBarController?.tabBar.items?[0].image = UIImage(named: "tabBar_search")
         
         let stackView = UIStackView(frame: .zero)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -106,11 +112,6 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
         stackView.addArrangedSubview(searchButton)
         searchButton.heightAnchor.constraint(equalTo: searchButton.widthAnchor ,multiplier: 0.2).isActive = true
         addObserver(self, forKeyPath: #keyPath(searchButton.isEnabled), options: [.new], context: nil)
-    }
-    
-    private func setUpAndLayoutViews() {
-        title = "輸入搜尋"
-        view.backgroundColor = .systemBackground
     }
     
     // MARK: User interaction action
