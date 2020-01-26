@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		C2590B7F23DD9E1D0055ADA7 /* FlickrAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B7E23DD9E1D0055ADA7 /* FlickrAPI.swift */; };
 		C2590B8323DDA0E10055ADA7 /* FilckrAPIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8223DDA0E10055ADA7 /* FilckrAPIWorker.swift */; };
+		C2590B8B23DDDBFA0055ADA7 /* PhotoWallPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8523DDDBFA0055ADA7 /* PhotoWallPresenter.swift */; };
+		C2590B8D23DDDBFA0055ADA7 /* PhotoWallRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8723DDDBFA0055ADA7 /* PhotoWallRouter.swift */; };
+		C2590B8E23DDDBFA0055ADA7 /* PhotoWallModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8823DDDBFA0055ADA7 /* PhotoWallModels.swift */; };
+		C2590B8F23DDDBFA0055ADA7 /* PhotoWallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8923DDDBFA0055ADA7 /* PhotoWallViewController.swift */; };
+		C2590B9023DDDBFA0055ADA7 /* PhotoWallInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8A23DDDBFA0055ADA7 /* PhotoWallInteractor.swift */; };
 		C2AF0BE923DB46EA00238E37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BE823DB46EA00238E37 /* AppDelegate.swift */; };
 		C2AF0BEB23DB46EA00238E37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BEA23DB46EA00238E37 /* SceneDelegate.swift */; };
 		C2AF0BF223DB46EC00238E37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2AF0BF123DB46EC00238E37 /* Assets.xcassets */; };
@@ -29,6 +34,11 @@
 		4F32D06CE87BB3DDB9FDB5A0 /* Pods-FlickrSearcher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlickrSearcher.debug.xcconfig"; path = "Target Support Files/Pods-FlickrSearcher/Pods-FlickrSearcher.debug.xcconfig"; sourceTree = "<group>"; };
 		C2590B7E23DD9E1D0055ADA7 /* FlickrAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrAPI.swift; sourceTree = "<group>"; };
 		C2590B8223DDA0E10055ADA7 /* FilckrAPIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilckrAPIWorker.swift; sourceTree = "<group>"; };
+		C2590B8523DDDBFA0055ADA7 /* PhotoWallPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWallPresenter.swift; sourceTree = "<group>"; };
+		C2590B8723DDDBFA0055ADA7 /* PhotoWallRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWallRouter.swift; sourceTree = "<group>"; };
+		C2590B8823DDDBFA0055ADA7 /* PhotoWallModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWallModels.swift; sourceTree = "<group>"; };
+		C2590B8923DDDBFA0055ADA7 /* PhotoWallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWallViewController.swift; sourceTree = "<group>"; };
+		C2590B8A23DDDBFA0055ADA7 /* PhotoWallInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWallInteractor.swift; sourceTree = "<group>"; };
 		C2AF0BE523DB46EA00238E37 /* FlickrSearcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSearcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2AF0BE823DB46EA00238E37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2AF0BEA23DB46EA00238E37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +91,18 @@
 			path = Worker;
 			sourceTree = "<group>";
 		};
+		C2590B8423DDD8940055ADA7 /* PhotoWall */ = {
+			isa = PBXGroup;
+			children = (
+				C2590B8523DDDBFA0055ADA7 /* PhotoWallPresenter.swift */,
+				C2590B8723DDDBFA0055ADA7 /* PhotoWallRouter.swift */,
+				C2590B8823DDDBFA0055ADA7 /* PhotoWallModels.swift */,
+				C2590B8923DDDBFA0055ADA7 /* PhotoWallViewController.swift */,
+				C2590B8A23DDDBFA0055ADA7 /* PhotoWallInteractor.swift */,
+			);
+			path = PhotoWall;
+			sourceTree = "<group>";
+		};
 		C2AF0BDC23DB46EA00238E37 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				C2AF0C0123DC903200238E37 /* Search */,
+				C2590B8423DDD8940055ADA7 /* PhotoWall */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -274,12 +297,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2AF0C0B23DC905300238E37 /* SearchModels.swift in Sources */,
+				C2590B8F23DDDBFA0055ADA7 /* PhotoWallViewController.swift in Sources */,
 				C2AF0C0A23DC905300238E37 /* SearchRouter.swift in Sources */,
 				C2AF0C0C23DC905300238E37 /* SearchViewController.swift in Sources */,
 				C2AF0C0D23DC905300238E37 /* SearchInteractor.swift in Sources */,
 				C2590B8323DDA0E10055ADA7 /* FilckrAPIWorker.swift in Sources */,
+				C2590B8E23DDDBFA0055ADA7 /* PhotoWallModels.swift in Sources */,
+				C2590B8B23DDDBFA0055ADA7 /* PhotoWallPresenter.swift in Sources */,
 				C2AF0C1C23DD969100238E37 /* NetworkServiceProvider.swift in Sources */,
 				C2AF0C1E23DD971700238E37 /* NetworkService.swift in Sources */,
+				C2590B8D23DDDBFA0055ADA7 /* PhotoWallRouter.swift in Sources */,
+				C2590B9023DDDBFA0055ADA7 /* PhotoWallInteractor.swift in Sources */,
 				C2AF0BE923DB46EA00238E37 /* AppDelegate.swift in Sources */,
 				C2AF0C0823DC905300238E37 /* SearchPresenter.swift in Sources */,
 				C2AF0BEB23DB46EA00238E37 /* SceneDelegate.swift in Sources */,

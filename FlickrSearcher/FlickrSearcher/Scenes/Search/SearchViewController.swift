@@ -11,7 +11,6 @@
 //
 
 import UIKit
-import PKHUD
 
 protocol SearchDisplayLogic: class {
 }
@@ -32,7 +31,7 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
         return textField
     }()
     
-    lazy var pageCapacityTextField: UITextField = {
+    lazy var countPerPageTextField: UITextField = {
         let textField = UITextField(frame: .zero)
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
@@ -108,8 +107,8 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
         
         stackView.addArrangedSubview(keyWordTextField)
         keyWordTextField.heightAnchor.constraint(equalTo: keyWordTextField.widthAnchor, multiplier: 0.16).isActive = true
-        stackView.addArrangedSubview(pageCapacityTextField)
-        pageCapacityTextField.heightAnchor.constraint(equalTo: pageCapacityTextField.widthAnchor, multiplier: 0.16).isActive = true
+        stackView.addArrangedSubview(countPerPageTextField)
+        countPerPageTextField.heightAnchor.constraint(equalTo: countPerPageTextField.widthAnchor, multiplier: 0.16).isActive = true
         stackView.addArrangedSubview(searchButton)
         searchButton.heightAnchor.constraint(equalTo: searchButton.widthAnchor ,multiplier: 0.2).isActive = true
         addObserver(self, forKeyPath: #keyPath(searchButton.isEnabled), options: [.new], context: nil)
@@ -117,11 +116,11 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
     
     // MARK: User interaction action
     @objc func searchButtonDidTapped() {
-        HUD.show(.labeledProgress(title: nil, subtitle: "Loading..."))
+        guard let keyword = keyWordTextField.text, let countString = countPerPageTextField.text, let countPerPage = Int(countString) else {
+            return
+        }
+        router?.routeToPhotoWall(keyword: keyword, countPerPage: countPerPage)
     }
-  
-    // MARK: Displaying logics
-    
 }
 
 // MARK: UITextFieldDelegate
@@ -137,7 +136,7 @@ extension SearchViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case keyWordTextField:
-            pageCapacityTextField.becomeFirstResponder()
+            countPerPageTextField.becomeFirstResponder()
         default:
             textField.resignFirstResponder()
         }
@@ -145,7 +144,7 @@ extension SearchViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if (keyWordTextField.text?.isEmpty ?? true) || (pageCapacityTextField.text?.isEmpty ?? true) {
+        if (keyWordTextField.text?.isEmpty ?? true) || (countPerPageTextField.text?.isEmpty ?? true) {
             searchButton.isEnabled = false
         } else {
             searchButton.isEnabled = true
