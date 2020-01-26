@@ -7,4 +7,5 @@ target 'FlickrSearcher' do
 
   # Pods for FlickrSearcher
   pod 'Alamofire'
+  pod 'PKHUD'
 end

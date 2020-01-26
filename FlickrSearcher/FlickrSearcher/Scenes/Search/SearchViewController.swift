@@ -11,6 +11,7 @@
 //
 
 import UIKit
+import PKHUD
 
 protocol SearchDisplayLogic: class {
 }
@@ -116,7 +117,7 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
     
     // MARK: User interaction action
     @objc func searchButtonDidTapped() {
-        print("search")
+        HUD.show(.labeledProgress(title: nil, subtitle: "Loading..."))
     }
   
     // MARK: Displaying logics
