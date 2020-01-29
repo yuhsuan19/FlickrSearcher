@@ -9,12 +9,12 @@
 import Foundation
 import Alamofire
 
-enum Result {
-    case success(Any)
+enum NetworkResult<Value> {
+    case success(Value)
     case failure(Error)
 }
 
-struct Response {
+struct NetWorkResponse {
     var statusCode: Int {
         return response.statusCode
     }
@@ -24,7 +24,7 @@ struct Response {
 }
 
 class NetworkServiceProvider {
-    typealias ProviderCompletion = (Result) -> Void
+    typealias ProviderCompletion = (NetworkResult<NetWorkResponse>) -> Void
     
     func request(for service: NetworkService, completion: @escaping ProviderCompletion) {
         let request = service.request
@@ -37,7 +37,7 @@ class NetworkServiceProvider {
             
             switch dataResponse.result {
             case .success(let data):
-                let response = Response(data: data, request: request, response: response)
+                let response = NetWorkResponse(data: data, request: request, response: response)
                 completion(.success(response))
             case .failure(let error):
                 completion(.failure(error))

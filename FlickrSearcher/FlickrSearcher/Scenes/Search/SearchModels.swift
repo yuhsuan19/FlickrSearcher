@@ -14,13 +14,6 @@ import UIKit
 
 enum Search {
     // MARK: Use cases
-    enum Search {
-        struct Request {
-            var keyword: String
-            var countPerPage: Int
-            var page: Int
-        }
-    }
     
     enum Something {
         struct Request {

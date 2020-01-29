@@ -13,8 +13,23 @@
 import UIKit
 
 protocol PhotoWallPresentationLogic {
+    func presentLoadPhotos(response: PhotoWall.LoadPhotos.Response)
 }
 
 class PhotoWallPresenter: PhotoWallPresentationLogic {
     weak var viewController: PhotoWallDisplayLogic?
+    func presentLoadPhotos(response: PhotoWall.LoadPhotos.Response) {
+        var viewModel = PhotoWall.LoadPhotos.ViewModel()
+        if let error = response.error {
+            
+        } else {
+            var filckrPhotos:[PhotoWall.FlickrPhoto] = []
+            response.photos.forEach() {
+                filckrPhotos.append(PhotoWall.FlickrPhoto(json: $0))
+            }
+            viewModel.flickrPhotos = filckrPhotos
+        }
+        
+        viewController?.displayLoadPhotos(viewModel: viewModel)
+    }
 }

@@ -11,15 +11,54 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 protocol PhotoWallBusinessLogic {
+    func loadPhotos(request: PhotoWall.LoadPhotos.Request)
 }
 
 protocol PhotoWallDataStore {
+    var keyword: String { get set }
+    var countPerPage: Int { get set }
 }
 
 class PhotoWallInteractor: PhotoWallBusinessLogic, PhotoWallDataStore {
     var presenter: PhotoWallPresentationLogic?
-  
-    // MARK: Do something
+    var worker = FlickrAPIWorker()
+
+    var keyword: String
+    var countPerPage: Int
+    var currentPage = 0
+    var totalPages = 0
+    
+    init(keyword: String, countPerPage: Int) {
+        self.keyword = keyword
+        self.countPerPage = countPerPage
+    }
+    
+    func loadPhotos(request: PhotoWall.LoadPhotos.Request) {
+        currentPage += 1
+        
+        var response = PhotoWall.LoadPhotos.Response()
+        worker.search(with: keyword, perpageCount: countPerPage, page: currentPage) { [weak self] (result) in
+            switch result {
+            case .success(let responseData):
+                guard let parsedDic = responseData as? [String: Any],
+                let page = parsedDic["page"] as? Int,
+                let pages = parsedDic["pages"] as? Int,
+                let photos = parsedDic["photos"] as? [JSON],
+                self?.currentPage == page else {
+                    // to do: error handling
+                    return
+                }
+                self?.totalPages = pages
+                response.photos = photos
+                
+                self?.presenter?.presentLoadPhotos(response: response)
+                
+            case .failure(let error):
+                break
+            }
+        }
+    }
 }

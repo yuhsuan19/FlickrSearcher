@@ -11,21 +11,43 @@
 //
 
 import UIKit
+import SwiftyJSON
 
-enum PhotoWall
-{
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
-    {
+enum PhotoWall {
+    // MARK: Use cases
+    enum LoadPhotos {
+        struct Request { }
+        struct Response {
+            var error: Error?
+            var photos: [JSON] = []
+        }
+        struct ViewModel {
+            var errorMessage: String?
+            var flickrPhotos: [FlickrPhoto] = []
+        }
     }
-    struct Response
-    {
+    
+    struct FlickrPhoto {
+        let id: String
+        let server: String
+        let title: String
+        let secret: String
+        let owner: String
+        let isPublic: Bool
+        let isFriend: Bool
+        let isFamily: Bool
+        let farm: Int
+        
+        init(json: JSON) {
+            id = json["id"].stringValue
+            server = json["server"].stringValue
+            title = json["title"].stringValue
+            secret = json["secret"].stringValue
+            owner = json["owner"].stringValue
+            isPublic = (json["ispublic"].intValue == 1)
+            isFriend = (json["isfriend"].intValue == 1)
+            isFamily = (json["isFamily"].intValue == 1)
+            farm = json["farm"].intValue
+        }
     }
-    struct ViewModel
-    {
-    }
-  }
 }

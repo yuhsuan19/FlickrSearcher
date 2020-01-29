@@ -11,24 +11,29 @@
 //
 
 import UIKit
+import PKHUD
 
 protocol PhotoWallDisplayLogic: class {
+    func displayLoadPhotos(viewModel: PhotoWall.LoadPhotos.ViewModel)
 }
 
 class PhotoWallViewController: UIViewController, PhotoWallDisplayLogic {
     var interactor: PhotoWallBusinessLogic?
     var router: (NSObjectProtocol & PhotoWallRoutingLogic & PhotoWallDataPassing)?
-    var countPerPage: Int = 100
+    let keyword: String
+    let countPerPage: Int
 
     // MARK: Object lifecycle
     init(keyword: String, countPerPage: Int) {
-        super.init(nibName: nil, bundle: nil)
-        title = "搜尋：\(keyword)"
+        self.keyword = keyword
         self.countPerPage = countPerPage
+        super.init(nibName: nil, bundle: nil)
         setup()
     }
   
     required init?(coder aDecoder: NSCoder) {
+        self.keyword = ""
+        self.countPerPage = 100
         super.init(coder: aDecoder)
         setup()
     }
@@ -36,7 +41,7 @@ class PhotoWallViewController: UIViewController, PhotoWallDisplayLogic {
     // MARK: Setup
     private func setup() {
         let viewController = self
-        let interactor = PhotoWallInteractor()
+        let interactor = PhotoWallInteractor(keyword: keyword, countPerPage: countPerPage)
         let presenter = PhotoWallPresenter()
         let router = PhotoWallRouter()
         viewController.interactor = interactor
@@ -51,9 +56,21 @@ class PhotoWallViewController: UIViewController, PhotoWallDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAndLayoutViews()
+        loadPhotos()
     }
     
     private func setUpAndLayoutViews() {
         view.backgroundColor = .systemBackground
+    }
+    
+    private func loadPhotos() {
+        HUD.show(.labeledProgress(title: nil, subtitle: "讀取中..."))
+        let request = PhotoWall.LoadPhotos.Request()
+        interactor?.loadPhotos(request: request)
+    }
+    
+    // MARK: Display logics
+    func displayLoadPhotos(viewModel: PhotoWall.LoadPhotos.ViewModel) {
+        
     }
 }

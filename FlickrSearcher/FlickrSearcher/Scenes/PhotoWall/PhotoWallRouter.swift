@@ -12,49 +12,14 @@
 
 import UIKit
 
-@objc protocol PhotoWallRoutingLogic
-{
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+@objc protocol PhotoWallRoutingLogic {
 }
 
-protocol PhotoWallDataPassing
-{
-  var dataStore: PhotoWallDataStore? { get }
+protocol PhotoWallDataPassing {
+    var dataStore: PhotoWallDataStore? { get set }
 }
 
-class PhotoWallRouter: NSObject, PhotoWallRoutingLogic, PhotoWallDataPassing
-{
-  weak var viewController: PhotoWallViewController?
-  var dataStore: PhotoWallDataStore?
-  
-  // MARK: Routing
-  
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
-
-  // MARK: Navigation
-  
-  //func navigateToSomewhere(source: PhotoWallViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
-  
-  // MARK: Passing data
-  
-  //func passDataToSomewhere(source: PhotoWallDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
+class PhotoWallRouter: NSObject, PhotoWallRoutingLogic, PhotoWallDataPassing {
+    weak var viewController: PhotoWallViewController?
+    var dataStore: PhotoWallDataStore?
 }
