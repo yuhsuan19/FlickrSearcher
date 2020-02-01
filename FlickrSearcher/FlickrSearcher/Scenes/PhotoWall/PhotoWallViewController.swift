@@ -23,6 +23,12 @@ class PhotoWallViewController: UIViewController, PhotoWallDisplayLogic {
     let keyword: String
     let countPerPage: Int
 
+    // MARK: User interface elements
+    lazy var collectionView: PhotoWallCollectionView = {
+        let collectionView = PhotoWallCollectionView()
+        return collectionView
+    }()
+    
     // MARK: Object lifecycle
     init(keyword: String, countPerPage: Int) {
         self.keyword = keyword
@@ -60,7 +66,14 @@ class PhotoWallViewController: UIViewController, PhotoWallDisplayLogic {
     }
     
     private func setUpAndLayoutViews() {
+        title = "搜尋：\(keyword)"
         view.backgroundColor = .systemBackground
+        
+        view.addSubview(collectionView)
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
     private func loadPhotos() {
@@ -71,6 +84,12 @@ class PhotoWallViewController: UIViewController, PhotoWallDisplayLogic {
     
     // MARK: Display logics
     func displayLoadPhotos(viewModel: PhotoWall.LoadPhotos.ViewModel) {
-        
+        HUD.hide()
+        if let errorMessage = viewModel.errorMessage {
+            // to do: show error message
+        } else {
+            collectionView.fickrPhotos.append(contentsOf: viewModel.flickrPhotos)
+            collectionView.reloadData()
+        }
     }
 }
