@@ -88,7 +88,7 @@ class PhotoWallViewController: UIViewController, PhotoWallDisplayLogic {
         if let errorMessage = viewModel.errorMessage {
             // to do: show error message
         } else {
-            collectionView.fickrPhotos.append(contentsOf: viewModel.flickrPhotos)
+            collectionView.flickrPhotos.append(contentsOf: viewModel.flickrPhotos)
             collectionView.reloadData()
         }
     }

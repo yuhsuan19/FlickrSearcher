@@ -10,7 +10,7 @@ import UIKit
 
 class PhotoWallCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var fickrPhotos: [PhotoWall.FlickrPhoto] = []
+    var flickrPhotos: [PhotoWall.FlickrPhoto] = []
     
     // MARK: Object life cycle
     required init?(coder: NSCoder) {
@@ -21,7 +21,7 @@ class PhotoWallCollectionView: UICollectionView, UICollectionViewDelegate, UICol
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         let size = CGFloat((UIScreen.main.bounds.width / 2) - 3)
-        layout.itemSize = CGSize(width: size, height: size)
+        layout.itemSize = CGSize(width: size, height: size * 1.2)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 5.0
         super.init(frame: .zero, collectionViewLayout: layout)
@@ -33,12 +33,14 @@ class PhotoWallCollectionView: UICollectionView, UICollectionViewDelegate, UICol
     }
    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return fickrPhotos.count
+        return flickrPhotos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoWallCollectionViewCell.reuseIdentifier, for: indexPath)
-        cell.backgroundColor = .systemPink
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoWallCollectionViewCell.reuseIdentifier, for: indexPath) as! PhotoWallCollectionViewCell
+        let flickrPhoto = flickrPhotos[indexPath.row]
+        
+        cell.titleLabel.text = flickrPhoto.title
         return cell
     }
 }
