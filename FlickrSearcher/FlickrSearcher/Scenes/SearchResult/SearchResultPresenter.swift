@@ -20,6 +20,8 @@ class SearchResultPresenter: SearchResultPresentationLogic {
     weak var viewController: SearchResultDisplayLogic?
     func presentLoadPhotos(response: SearchResult.LoadPhotos.Response) {
         var viewModel = SearchResult.LoadPhotos.ViewModel()
+        viewModel.isLoadingAll = response.isLoadingAll
+        
         if let error = response.error {
             
         } else {

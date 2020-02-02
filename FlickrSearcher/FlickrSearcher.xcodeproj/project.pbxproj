@@ -11,7 +11,7 @@
 		C2590B8323DDA0E10055ADA7 /* FilckrAPIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8223DDA0E10055ADA7 /* FilckrAPIWorker.swift */; };
 		C2590B8B23DDDBFA0055ADA7 /* SearchResultPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8523DDDBFA0055ADA7 /* SearchResultPresenter.swift */; };
 		C2590B8D23DDDBFA0055ADA7 /* SearchResultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8723DDDBFA0055ADA7 /* SearchResultRouter.swift */; };
-		C2590B8E23DDDBFA0055ADA7 /* PhotoWallModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8823DDDBFA0055ADA7 /* PhotoWallModels.swift */; };
+		C2590B8E23DDDBFA0055ADA7 /* SearchResultModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8823DDDBFA0055ADA7 /* SearchResultModels.swift */; };
 		C2590B8F23DDDBFA0055ADA7 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8923DDDBFA0055ADA7 /* SearchResultViewController.swift */; };
 		C2590B9023DDDBFA0055ADA7 /* SearchResultInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B8A23DDDBFA0055ADA7 /* SearchResultInteractor.swift */; };
 		C2590B9523E2D5440055ADA7 /* PhotoWallCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B9423E2D5440055ADA7 /* PhotoWallCollectionView.swift */; };
@@ -39,7 +39,7 @@
 		C2590B8223DDA0E10055ADA7 /* FilckrAPIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilckrAPIWorker.swift; sourceTree = "<group>"; };
 		C2590B8523DDDBFA0055ADA7 /* SearchResultPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultPresenter.swift; sourceTree = "<group>"; };
 		C2590B8723DDDBFA0055ADA7 /* SearchResultRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultRouter.swift; sourceTree = "<group>"; };
-		C2590B8823DDDBFA0055ADA7 /* PhotoWallModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWallModels.swift; sourceTree = "<group>"; };
+		C2590B8823DDDBFA0055ADA7 /* SearchResultModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultModels.swift; sourceTree = "<group>"; };
 		C2590B8923DDDBFA0055ADA7 /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		C2590B8A23DDDBFA0055ADA7 /* SearchResultInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultInteractor.swift; sourceTree = "<group>"; };
 		C2590B9423E2D5440055ADA7 /* PhotoWallCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWallCollectionView.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 			children = (
 				C2590B8523DDDBFA0055ADA7 /* SearchResultPresenter.swift */,
 				C2590B8723DDDBFA0055ADA7 /* SearchResultRouter.swift */,
-				C2590B8823DDDBFA0055ADA7 /* PhotoWallModels.swift */,
+				C2590B8823DDDBFA0055ADA7 /* SearchResultModels.swift */,
 				C2590B8923DDDBFA0055ADA7 /* SearchResultViewController.swift */,
 				C2590B8A23DDDBFA0055ADA7 /* SearchResultInteractor.swift */,
 				C25EB22623E712E300C3A2E6 /* SearchResultCollectionView.swift */,
@@ -324,7 +324,7 @@
 				C2AF0C0C23DC905300238E37 /* SearchViewController.swift in Sources */,
 				C2AF0C0D23DC905300238E37 /* SearchInteractor.swift in Sources */,
 				C2590B8323DDA0E10055ADA7 /* FilckrAPIWorker.swift in Sources */,
-				C2590B8E23DDDBFA0055ADA7 /* PhotoWallModels.swift in Sources */,
+				C2590B8E23DDDBFA0055ADA7 /* SearchResultModels.swift in Sources */,
 				C2590B8B23DDDBFA0055ADA7 /* SearchResultPresenter.swift in Sources */,
 				C25EB22723E712E300C3A2E6 /* SearchResultCollectionView.swift in Sources */,
 				C2590B9723E2D5600055ADA7 /* PhotoWallCollectionViewCell.swift in Sources */,

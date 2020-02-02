@@ -20,10 +20,12 @@ enum SearchResult {
         struct Response {
             var error: Error?
             var photos: [JSON] = []
+            var isLoadingAll: Bool = false
         }
         struct ViewModel {
             var errorMessage: String?
             var flickrPhotos: [FlickrPhoto] = []
+            var isLoadingAll: Bool = false
         }
     }
     

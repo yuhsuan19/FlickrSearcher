@@ -29,7 +29,6 @@ class SearchResultInteractor: SearchResultBusinessLogic, SearchResultDataStore {
     var keyword: String
     var countPerPage: Int
     var currentPage = 0
-    var totalPages = 0
     
     init(keyword: String, countPerPage: Int) {
         self.keyword = keyword
@@ -51,9 +50,9 @@ class SearchResultInteractor: SearchResultBusinessLogic, SearchResultDataStore {
                     // to do: error handling
                     return
                 }
-                self?.totalPages = pages
                 response.photos = photos
-                
+                response.isLoadingAll = (self?.currentPage == pages)
+                    
                 self?.presenter?.presentLoadPhotos(response: response)
                 
             case .failure(let error):

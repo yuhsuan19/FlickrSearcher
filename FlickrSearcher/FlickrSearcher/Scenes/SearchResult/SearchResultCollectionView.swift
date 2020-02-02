@@ -9,7 +9,14 @@
 import UIKit
 import Kingfisher
 
+protocol SearchResultCollectionViewDelegate: class {
+    func shouldLoadNextPage()
+    func lastCellWillDisplay()
+}
+
 class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPhoto> {
+    weak var lazyLoadingDelegate: SearchResultCollectionViewDelegate?
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! PhotoWallCollectionViewCell
         let flickrPhoto = photos[indexPath.row]
@@ -25,5 +32,13 @@ class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPho
         let cacheKey = "\(imageURL).cache"
         let resource = ImageResource(downloadURL: imageURL, cacheKey: cacheKey)
         cell.imageView.kf.setImage(with: resource)
+        
+        if photos.count - indexPath.row <= 10 {
+            lazyLoadingDelegate?.shouldLoadNextPage()
+        }
+        
+        if indexPath.row == photos.count - 1 {
+            lazyLoadingDelegate?.lastCellWillDisplay()
+        }
     }
 }

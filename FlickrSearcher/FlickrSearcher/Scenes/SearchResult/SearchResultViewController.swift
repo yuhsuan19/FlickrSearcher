@@ -22,10 +22,13 @@ class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
     var router: (NSObjectProtocol & PhotoWallRoutingLogic & SearchResultDataPassing)?
     let keyword: String
     let countPerPage: Int
+    var isLoadingPhotos: Bool = false
+    var isLoadingAll: Bool = false
 
     // MARK: User interface elements
     lazy var collectionView: SearchResultCollectionView = {
         let collectionView = SearchResultCollectionView()
+        collectionView.lazyLoadingDelegate = self
         return collectionView
     }()
     
@@ -62,6 +65,8 @@ class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAndLayoutViews()
+        // load first page
+        HUD.show(.labeledProgress(title: nil, subtitle: "讀取中..."))
         loadPhotos()
     }
     
@@ -77,19 +82,39 @@ class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
     }
     
     private func loadPhotos() {
-        HUD.show(.labeledProgress(title: nil, subtitle: "讀取中..."))
+        isLoadingPhotos = true
+        
         let request = SearchResult.LoadPhotos.Request()
         interactor?.loadPhotos(request: request)
     }
     
     // MARK: Display logics
     func displayLoadPhotos(viewModel: SearchResult.LoadPhotos.ViewModel) {
+        isLoadingPhotos = false
         HUD.hide()
         if let errorMessage = viewModel.errorMessage {
             // to do: show error message
         } else {
+            isLoadingAll = viewModel.isLoadingAll
             collectionView.photos.append(contentsOf: viewModel.flickrPhotos)
             collectionView.reloadData()
         }
     }
+}
+
+extension SearchResultViewController: SearchResultCollectionViewDelegate {
+    func shouldLoadNextPage() {
+        guard !isLoadingPhotos && !isLoadingAll else {
+            return
+        }
+        loadPhotos()
+    }
+    
+    func lastCellWillDisplay() {
+        if isLoadingPhotos {
+            HUD.show(.labeledProgress(title: nil, subtitle: "讀取中..."))
+        }
+    }
+    
+    
 }
