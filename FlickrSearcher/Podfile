@@ -9,4 +9,5 @@ target 'FlickrSearcher' do
   pod 'Alamofire'
   pod 'PKHUD'
   pod 'SwiftyJSON'
+  pod 'Kingfisher'
 end

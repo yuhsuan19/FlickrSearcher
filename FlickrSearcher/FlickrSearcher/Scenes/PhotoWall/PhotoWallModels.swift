@@ -38,6 +38,10 @@ enum PhotoWall {
         let isFamily: Bool
         let farm: Int
         
+        var imageUrl: URL? {
+           return URL(string: "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_m.jpg")
+        }
+        
         init(json: JSON) {
             id = json["id"].stringValue
             server = json["server"].stringValue
