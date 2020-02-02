@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PhotoWallCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -42,5 +43,15 @@ class PhotoWallCollectionView: UICollectionView, UICollectionViewDelegate, UICol
         
         cell.titleLabel.text = flickrPhoto.title
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? PhotoWallCollectionViewCell,
+              let imageURL = flickrPhotos[indexPath.row].imageUrl else {
+            return
+        }
+        let cacheKey = "\(imageURL).cache"
+        let resource = ImageResource(downloadURL: imageURL, cacheKey: cacheKey)
+        cell.imageView.kf.setImage(with: resource)
     }
 }
