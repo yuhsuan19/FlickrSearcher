@@ -12,20 +12,20 @@
 
 import UIKit
 
-protocol PhotoWallPresentationLogic {
-    func presentLoadPhotos(response: PhotoWall.LoadPhotos.Response)
+protocol SearchResultPresentationLogic {
+    func presentLoadPhotos(response: SearchResult.LoadPhotos.Response)
 }
 
-class PhotoWallPresenter: PhotoWallPresentationLogic {
-    weak var viewController: PhotoWallDisplayLogic?
-    func presentLoadPhotos(response: PhotoWall.LoadPhotos.Response) {
-        var viewModel = PhotoWall.LoadPhotos.ViewModel()
+class SearchResultPresenter: SearchResultPresentationLogic {
+    weak var viewController: SearchResultDisplayLogic?
+    func presentLoadPhotos(response: SearchResult.LoadPhotos.Response) {
+        var viewModel = SearchResult.LoadPhotos.ViewModel()
         if let error = response.error {
             
         } else {
-            var filckrPhotos:[PhotoWall.FlickrPhoto] = []
+            var filckrPhotos:[SearchResult.FlickrPhoto] = []
             response.photos.forEach() {
-                filckrPhotos.append(PhotoWall.FlickrPhoto(json: $0))
+                filckrPhotos.append(SearchResult.FlickrPhoto(json: $0))
             }
             viewModel.flickrPhotos = filckrPhotos
         }

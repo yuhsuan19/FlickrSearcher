@@ -26,7 +26,7 @@ class SearchRouter: NSObject, SearchRoutingLogic, SearchDataPassing {
   
   // MARK: Routing
     func routeToPhotoWall(keyword: String, countPerPage: Int) {
-        let photoWallViewController = PhotoWallViewController(keyword: keyword, countPerPage: countPerPage)
+        let photoWallViewController = SearchResultViewController(keyword: keyword, countPerPage: countPerPage)
         viewController?.navigationController?.pushViewController(photoWallViewController, animated: true)
     }
 }

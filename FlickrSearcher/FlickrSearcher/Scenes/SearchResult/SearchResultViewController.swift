@@ -13,19 +13,19 @@
 import UIKit
 import PKHUD
 
-protocol PhotoWallDisplayLogic: class {
-    func displayLoadPhotos(viewModel: PhotoWall.LoadPhotos.ViewModel)
+protocol SearchResultDisplayLogic: class {
+    func displayLoadPhotos(viewModel: SearchResult.LoadPhotos.ViewModel)
 }
 
-class PhotoWallViewController: UIViewController, PhotoWallDisplayLogic {
-    var interactor: PhotoWallBusinessLogic?
-    var router: (NSObjectProtocol & PhotoWallRoutingLogic & PhotoWallDataPassing)?
+class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
+    var interactor: SearchResultBusinessLogic?
+    var router: (NSObjectProtocol & PhotoWallRoutingLogic & SearchResultDataPassing)?
     let keyword: String
     let countPerPage: Int
 
     // MARK: User interface elements
-    lazy var collectionView: PhotoWallCollectionView = {
-        let collectionView = PhotoWallCollectionView()
+    lazy var collectionView: SearchResultCollectionView = {
+        let collectionView = SearchResultCollectionView()
         return collectionView
     }()
     
@@ -47,9 +47,9 @@ class PhotoWallViewController: UIViewController, PhotoWallDisplayLogic {
     // MARK: Setup
     private func setup() {
         let viewController = self
-        let interactor = PhotoWallInteractor(keyword: keyword, countPerPage: countPerPage)
-        let presenter = PhotoWallPresenter()
-        let router = PhotoWallRouter()
+        let interactor = SearchResultInteractor(keyword: keyword, countPerPage: countPerPage)
+        let presenter = SearchResultPresenter()
+        let router = SearchResultRouter()
         viewController.interactor = interactor
         viewController.router = router
         interactor.presenter = presenter
@@ -78,17 +78,17 @@ class PhotoWallViewController: UIViewController, PhotoWallDisplayLogic {
     
     private func loadPhotos() {
         HUD.show(.labeledProgress(title: nil, subtitle: "讀取中..."))
-        let request = PhotoWall.LoadPhotos.Request()
+        let request = SearchResult.LoadPhotos.Request()
         interactor?.loadPhotos(request: request)
     }
     
     // MARK: Display logics
-    func displayLoadPhotos(viewModel: PhotoWall.LoadPhotos.ViewModel) {
+    func displayLoadPhotos(viewModel: SearchResult.LoadPhotos.ViewModel) {
         HUD.hide()
         if let errorMessage = viewModel.errorMessage {
             // to do: show error message
         } else {
-            collectionView.flickrPhotos.append(contentsOf: viewModel.flickrPhotos)
+            collectionView.photos.append(contentsOf: viewModel.flickrPhotos)
             collectionView.reloadData()
         }
     }

@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import Kingfisher
+// import Kingfisher
 
-class PhotoWallCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
+class PhotoWallCollectionView<Photo>: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var flickrPhotos: [PhotoWall.FlickrPhoto] = []
+    var photos: [Photo] = []
     
     // MARK: Object life cycle
     required init?(coder: NSCoder) {
@@ -34,24 +34,14 @@ class PhotoWallCollectionView: UICollectionView, UICollectionViewDelegate, UICol
     }
    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return flickrPhotos.count
+        return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoWallCollectionViewCell.reuseIdentifier, for: indexPath) as! PhotoWallCollectionViewCell
-        let flickrPhoto = flickrPhotos[indexPath.row]
-        
-        cell.titleLabel.text = flickrPhoto.title
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoWallCollectionViewCell.reuseIdentifier, for: indexPath)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? PhotoWallCollectionViewCell,
-              let imageURL = flickrPhotos[indexPath.row].imageUrl else {
-            return
-        }
-        let cacheKey = "\(imageURL).cache"
-        let resource = ImageResource(downloadURL: imageURL, cacheKey: cacheKey)
-        cell.imageView.kf.setImage(with: resource)
     }
 }

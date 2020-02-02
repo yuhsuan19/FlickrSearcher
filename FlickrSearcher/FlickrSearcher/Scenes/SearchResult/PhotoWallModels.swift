@@ -13,7 +13,7 @@
 import UIKit
 import SwiftyJSON
 
-enum PhotoWall {
+enum SearchResult {
     // MARK: Use cases
     enum LoadPhotos {
         struct Request { }

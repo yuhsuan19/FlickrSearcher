@@ -15,11 +15,11 @@ import UIKit
 @objc protocol PhotoWallRoutingLogic {
 }
 
-protocol PhotoWallDataPassing {
-    var dataStore: PhotoWallDataStore? { get set }
+protocol SearchResultDataPassing {
+    var dataStore: SearchResultDataStore? { get set }
 }
 
-class PhotoWallRouter: NSObject, PhotoWallRoutingLogic, PhotoWallDataPassing {
-    weak var viewController: PhotoWallViewController?
-    var dataStore: PhotoWallDataStore?
+class SearchResultRouter: NSObject, PhotoWallRoutingLogic, SearchResultDataPassing {
+    weak var viewController: SearchResultViewController?
+    var dataStore: SearchResultDataStore?
 }

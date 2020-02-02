@@ -13,17 +13,17 @@
 import UIKit
 import SwiftyJSON
 
-protocol PhotoWallBusinessLogic {
-    func loadPhotos(request: PhotoWall.LoadPhotos.Request)
+protocol SearchResultBusinessLogic {
+    func loadPhotos(request: SearchResult.LoadPhotos.Request)
 }
 
-protocol PhotoWallDataStore {
+protocol SearchResultDataStore {
     var keyword: String { get set }
     var countPerPage: Int { get set }
 }
 
-class PhotoWallInteractor: PhotoWallBusinessLogic, PhotoWallDataStore {
-    var presenter: PhotoWallPresentationLogic?
+class SearchResultInteractor: SearchResultBusinessLogic, SearchResultDataStore {
+    var presenter: SearchResultPresentationLogic?
     var worker = FlickrAPIWorker()
 
     var keyword: String
@@ -36,10 +36,10 @@ class PhotoWallInteractor: PhotoWallBusinessLogic, PhotoWallDataStore {
         self.countPerPage = countPerPage
     }
     
-    func loadPhotos(request: PhotoWall.LoadPhotos.Request) {
+    func loadPhotos(request: SearchResult.LoadPhotos.Request) {
         currentPage += 1
         
-        var response = PhotoWall.LoadPhotos.Response()
+        var response = SearchResult.LoadPhotos.Response()
         worker.search(with: keyword, perpageCount: countPerPage, page: currentPage) { [weak self] (result) in
             switch result {
             case .success(let responseData):
