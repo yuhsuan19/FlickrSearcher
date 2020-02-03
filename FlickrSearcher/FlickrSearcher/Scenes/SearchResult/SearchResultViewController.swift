@@ -115,6 +115,4 @@ extension SearchResultViewController: SearchResultCollectionViewDelegate {
             HUD.show(.labeledProgress(title: nil, subtitle: "讀取中..."))
         }
     }
-    
-    
 }
