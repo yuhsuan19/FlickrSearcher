@@ -102,7 +102,7 @@ class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
         isLoadingPhotos = false
         HUD.hide()
         if let errorMessage = viewModel.errorMessage {
-            // to do: show error message
+            showErroMessage(errorMessage)
         } else {
             isLoadingAll = viewModel.isLoadingAll
             collectionView.photos.append(contentsOf: viewModel.flickrPhotos)
@@ -118,6 +118,14 @@ class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
         collectionView.reloadData()
     }
 
+    private func showErroMessage(_ message: String) {
+        let alert = UIAlertController(title: "錯誤", message: message, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "確認", style: .cancel, handler: nil)
+        
+        alert.addAction(confirmAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension SearchResultViewController: SearchResultCollectionViewDelegate {
@@ -137,6 +145,10 @@ extension SearchResultViewController: SearchResultCollectionViewDelegate {
     func collectPhoto(flickrId: String, title: String, imageData: Data) {
         let request = SearchResult.CollectPhoto.Request(imageData: imageData, title: title, id: flickrId)
         interactor?.collectPhoto(request: request)
+    }
+    
+    func showNoImageError() {
+        showErroMessage("圖片下載失敗，無法加入我的最愛！")
     }
     
     func uncollectPhoto(flickrId: String) {

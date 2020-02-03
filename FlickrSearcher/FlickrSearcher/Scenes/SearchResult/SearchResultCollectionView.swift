@@ -11,8 +11,13 @@ import Kingfisher
 
 protocol SearchResultCollectionViewDelegate: class {
     func shouldLoadNextPage()
+    
     func lastCellWillDisplay()
+    
     func collectPhoto(flickrId: String, title: String, imageData: Data)
+    
+    func showNoImageError()
+    
     func uncollectPhoto(flickrId: String)
 }
 
@@ -60,7 +65,8 @@ extension SearchResultCollectionView: PhotoWallCollectionViewCellDelegate {
         guard let image = cell.imageView.image,
               let imageData = image.jpegData(compressionQuality: 1.0),
               let indexPath = indexPath(for: cell) else {
-            return
+                flickrPhotoWallDelegate?.showNoImageError()
+                return
         }
         
         let flickrPhoto = photos[indexPath.row]

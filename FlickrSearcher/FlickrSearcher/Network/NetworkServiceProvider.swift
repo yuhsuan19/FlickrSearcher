@@ -31,7 +31,7 @@ class NetworkServiceProvider {
         
         Alamofire.request(request).responseData() { (dataResponse) in
             guard let response = dataResponse.response else {
-                // completion(.failure(AppError.networkFailed))
+                completion(.failure(AppError.networkFailed))
                 return
             }
             

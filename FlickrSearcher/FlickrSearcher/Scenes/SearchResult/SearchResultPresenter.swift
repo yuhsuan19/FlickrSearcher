@@ -26,8 +26,10 @@ class SearchResultPresenter: SearchResultPresentationLogic {
         var viewModel = SearchResult.LoadPhotos.ViewModel()
         viewModel.isLoadingAll = response.isLoadingAll
         
-        if let error = response.error {
-            
+        if let error = response.error as? AppError {
+            viewModel.errorMessage = error.localizedDescription
+        } else if let error = response.error {
+            viewModel.errorMessage = error.localizedDescription
         } else {
             var filckrPhotos:[SearchResult.FlickrPhoto] = []
             response.photos.forEach() {

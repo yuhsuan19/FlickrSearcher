@@ -52,7 +52,8 @@ class SearchResultInteractor: SearchResultBusinessLogic, SearchResultDataStore {
                 let pages = parsedDic["pages"] as? Int,
                 let photos = parsedDic["photos"] as? [JSON],
                 self?.currentPage == page else {
-                    // to do: error handling
+                    response.error = AppError.networkFailed
+                    self?.presenter?.presentLoadPhotos(response: response)
                     return
                 }
                 response.photos = photos
@@ -61,7 +62,8 @@ class SearchResultInteractor: SearchResultBusinessLogic, SearchResultDataStore {
                 self?.presenter?.presentLoadPhotos(response: response)
                 
             case .failure(let error):
-                break
+                response.error = error
+                self?.presenter?.presentLoadPhotos(response: response)
             }
         }
     }
