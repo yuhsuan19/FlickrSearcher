@@ -6,8 +6,9 @@ target 'FlickrSearcher' do
   use_frameworks!
 
   # Pods for FlickrSearcher
-  pod 'Alamofire'
-  pod 'PKHUD'
-  pod 'SwiftyJSON'
-  pod 'Kingfisher'
+  pod 'Alamofire', '4.9.1'
+  pod 'PKHUD', '5.3.0'
+  pod 'SwiftyJSON', '5.0.0'
+  pod 'Kingfisher', '5.9.0'
+  pod 'CouchbaseLite-Swift', '2.7.0'
 end
