@@ -35,6 +35,8 @@ enum SearchResult {
             var title: String
             var id: String
         }
+        struct Response {}
+        struct ViewModel {}
     }
     
     struct FlickrPhoto {

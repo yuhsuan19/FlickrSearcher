@@ -22,8 +22,14 @@ class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPho
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! PhotoWallCollectionViewCell
         let flickrPhoto = photos[indexPath.row]
         cell.titleLabel.text = flickrPhoto.title
-        cell.turnOffFavorite()
         cell.cellDelegate = self
+        
+        if LocalPhotoWorker.shared.allLocalPhotoIds.contains(flickrPhoto.id) {
+            cell.turnOnFavorite()
+        } else {
+            cell.turnOffFavorite()
+        }
+        
         return cell
     }
     

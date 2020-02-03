@@ -65,5 +65,9 @@ class SearchResultInteractor: SearchResultBusinessLogic, SearchResultDataStore {
     
     func collectPhoto(request: SearchResult.CollectPhoto.Request) {
         localPhotoWorker.newLocalPhoto(flickrID: request.id, title: request.title, imageData: request.imageData)
+        localPhotoWorker.allLocalPhotoIds.append(request.id)
+        
+        let response = SearchResult.CollectPhoto.Response()
+        presenter?.presentCollectPhot(reponse: response)
     }
 }

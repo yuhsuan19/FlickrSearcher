@@ -11,6 +11,7 @@ import CouchbaseLiteSwift
 
 class LocalPhotoWorker {
     static let shared = LocalPhotoWorker()
+    var allLocalPhotoIds: [String] = []
     
     func newLocalPhoto(flickrID: String, title: String, imageData: Data) {
         var newLocalPhoto = LocalPhotoModel()
@@ -21,6 +22,8 @@ class LocalPhotoWorker {
     }
     
     func fetchAllLocalPhotos() -> [[String: Any]] {
+        allLocalPhotoIds.removeAll()
+        
         let query = QueryBuilder
             .select(SelectResult.property("title"),
                     SelectResult.property("flickrId"),
@@ -40,6 +43,7 @@ class LocalPhotoWorker {
                         "flickrId": flickrId,
                         "imageData": imageData
                     ])
+                    allLocalPhotoIds.append(flickrId)
                 }
             }
             return output

@@ -15,6 +15,8 @@ import PKHUD
 
 protocol SearchResultDisplayLogic: class {
     func displayLoadPhotos(viewModel: SearchResult.LoadPhotos.ViewModel)
+    
+    func displayCollectPhoto(viewModel: SearchResult.CollectPhoto.ViewModel)
 }
 
 class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
@@ -99,6 +101,10 @@ class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
             collectionView.photos.append(contentsOf: viewModel.flickrPhotos)
             collectionView.reloadData()
         }
+    }
+    
+    func displayCollectPhoto(viewModel: SearchResult.CollectPhoto.ViewModel) {
+        collectionView.reloadData()
     }
 }
 

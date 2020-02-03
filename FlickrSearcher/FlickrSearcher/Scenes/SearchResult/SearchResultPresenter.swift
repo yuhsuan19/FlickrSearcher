@@ -14,6 +14,8 @@ import UIKit
 
 protocol SearchResultPresentationLogic {
     func presentLoadPhotos(response: SearchResult.LoadPhotos.Response)
+    
+    func presentCollectPhot(reponse: SearchResult.CollectPhoto.Response)
 }
 
 class SearchResultPresenter: SearchResultPresentationLogic {
@@ -33,5 +35,10 @@ class SearchResultPresenter: SearchResultPresentationLogic {
         }
         
         viewController?.displayLoadPhotos(viewModel: viewModel)
+    }
+    
+    func presentCollectPhot(reponse: SearchResult.CollectPhoto.Response) {
+        let viewModel = SearchResult.CollectPhoto.ViewModel()
+        viewController?.displayCollectPhoto(viewModel: viewModel)
     }
 }
