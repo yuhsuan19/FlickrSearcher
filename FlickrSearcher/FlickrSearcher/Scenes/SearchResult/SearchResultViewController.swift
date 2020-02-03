@@ -17,6 +17,8 @@ protocol SearchResultDisplayLogic: class {
     func displayLoadPhotos(viewModel: SearchResult.LoadPhotos.ViewModel)
     
     func displayCollectPhoto(viewModel: SearchResult.CollectPhoto.ViewModel)
+    
+    func displayUncollectPhoto(viewModel: SearchResult.UncollectPhoto.ViewModel)
 }
 
 class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
@@ -106,6 +108,11 @@ class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
     func displayCollectPhoto(viewModel: SearchResult.CollectPhoto.ViewModel) {
         collectionView.reloadData()
     }
+    
+    func displayUncollectPhoto(viewModel: SearchResult.UncollectPhoto.ViewModel) {
+        collectionView.reloadData()
+    }
+
 }
 
 extension SearchResultViewController: SearchResultCollectionViewDelegate {
@@ -125,5 +132,10 @@ extension SearchResultViewController: SearchResultCollectionViewDelegate {
     func collectPhoto(flickrId: String, title: String, imageData: Data) {
         let request = SearchResult.CollectPhoto.Request(imageData: imageData, title: title, id: flickrId)
         interactor?.collectPhoto(request: request)
+    }
+    
+    func uncollectPhoto(flickerId: String) {
+        let request = SearchResult.UncollectPhoto.Request(flickrId: flickerId)
+        interactor?.uncollectPhoto(request: request)
     }
 }

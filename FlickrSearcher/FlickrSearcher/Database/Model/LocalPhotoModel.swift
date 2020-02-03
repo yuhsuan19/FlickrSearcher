@@ -11,11 +11,21 @@ import CouchbaseLiteSwift
 
 struct LocalPhotoModel {
     static let type = "local_photo"
+    
+    let database = CouchbaseDBManager.shared.database
+    
     var document: MutableDocument
     
     init() {
         document = MutableDocument()
         document.setString(LocalPhotoModel.type, forKey: "type")
+    }
+    
+    init?(with id: String) {
+        guard let doc = database.document(withID: id) else {
+            return nil
+        }
+        document = doc.toMutable()
     }
     
     var flickrId: String {
@@ -57,9 +67,17 @@ struct LocalPhotoModel {
     
     func saved() {
         do {
-            try CouchbaseDBManager.shared.database.saveDocument(document)
+            try database.saveDocument(document)
         } catch {
             fatalError("Error saving document")
+        }
+    }
+    
+    func deleted() {
+        do {
+            try database.deleteDocument(document)
+        } catch {
+            fatalError("Error deleting document")
         }
     }
 }

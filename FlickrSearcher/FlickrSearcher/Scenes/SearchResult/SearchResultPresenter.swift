@@ -16,6 +16,8 @@ protocol SearchResultPresentationLogic {
     func presentLoadPhotos(response: SearchResult.LoadPhotos.Response)
     
     func presentCollectPhot(reponse: SearchResult.CollectPhoto.Response)
+    
+    func presentUncollectPhot(reponse: SearchResult.UncollectPhoto.Response)
 }
 
 class SearchResultPresenter: SearchResultPresentationLogic {
@@ -40,5 +42,10 @@ class SearchResultPresenter: SearchResultPresentationLogic {
     func presentCollectPhot(reponse: SearchResult.CollectPhoto.Response) {
         let viewModel = SearchResult.CollectPhoto.ViewModel()
         viewController?.displayCollectPhoto(viewModel: viewModel)
+    }
+    
+    func presentUncollectPhot(reponse: SearchResult.UncollectPhoto.Response) {
+        let viewModel = SearchResult.UncollectPhoto.ViewModel()
+        viewController?.displayUncollectPhoto(viewModel: viewModel)
     }
 }

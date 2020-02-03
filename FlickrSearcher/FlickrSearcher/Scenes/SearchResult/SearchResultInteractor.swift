@@ -15,7 +15,10 @@ import SwiftyJSON
 
 protocol SearchResultBusinessLogic {
     func loadPhotos(request: SearchResult.LoadPhotos.Request)
+    
     func collectPhoto(request: SearchResult.CollectPhoto.Request)
+    
+    func uncollectPhoto(request: SearchResult.UncollectPhoto.Request)
 }
 
 protocol SearchResultDataStore {
@@ -64,10 +67,16 @@ class SearchResultInteractor: SearchResultBusinessLogic, SearchResultDataStore {
     }
     
     func collectPhoto(request: SearchResult.CollectPhoto.Request) {
-        localPhotoWorker.newLocalPhoto(flickrID: request.id, title: request.title, imageData: request.imageData)
-        localPhotoWorker.allLocalPhotoIds.append(request.id)
+        localPhotoWorker.newLocalPhoto(flickrId: request.id, title: request.title, imageData: request.imageData)
         
         let response = SearchResult.CollectPhoto.Response()
         presenter?.presentCollectPhot(reponse: response)
+    }
+    
+    func uncollectPhoto(request: SearchResult.UncollectPhoto.Request) {
+        localPhotoWorker.deleteLocalPhoto(flickrID: request.flickrId)
+        
+        let response = SearchResult.UncollectPhoto.Response()
+        presenter?.presentUncollectPhot(reponse: response)
     }
 }

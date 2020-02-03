@@ -39,6 +39,14 @@ enum SearchResult {
         struct ViewModel {}
     }
     
+    enum UncollectPhoto {
+        struct Request {
+            var flickrId: String
+        }
+        struct Response {}
+        struct ViewModel {}
+    }
+    
     struct FlickrPhoto {
         let id: String
         let server: String

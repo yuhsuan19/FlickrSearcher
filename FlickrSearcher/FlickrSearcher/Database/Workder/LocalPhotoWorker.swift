@@ -13,12 +13,40 @@ class LocalPhotoWorker {
     static let shared = LocalPhotoWorker()
     var allLocalPhotoIds: [String] = []
     
-    func newLocalPhoto(flickrID: String, title: String, imageData: Data) {
+    func newLocalPhoto(flickrId: String, title: String, imageData: Data) {
         var newLocalPhoto = LocalPhotoModel()
-        newLocalPhoto.flickrId = flickrID
+        newLocalPhoto.flickrId = flickrId
         newLocalPhoto.title = title
         newLocalPhoto.imageData = imageData
         newLocalPhoto.saved()
+        
+        allLocalPhotoIds.append(flickrId)
+    }
+    
+    func deleteLocalPhoto(flickrID: String) {
+        let query = QueryBuilder
+            .select(SelectResult.expression(Meta.id))
+            .from(DataSource.database(CouchbaseDBManager.shared.database))
+            .where(Expression.property("flickrId")
+                .equalTo(Expression.string(flickrID)))
+        
+        do {
+            for result in try query.execute() {
+                if let metaId = result.toDictionary()["id"] as? String,
+                   let localPhoto = LocalPhotoModel(with: metaId) {
+                    let flickrId = localPhoto.flickrId
+                    
+                    if let index =  allLocalPhotoIds.firstIndex(of: flickrId) {
+                        allLocalPhotoIds.remove(at: index)
+                    }
+                    localPhoto.deleted()
+                } else {
+                    print("on")
+                }
+            }
+        } catch {
+            fatalError("Error fetching local photos")
+        }
     }
     
     func fetchAllLocalPhotos() -> [[String: Any]] {

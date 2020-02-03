@@ -13,10 +13,13 @@ protocol SearchResultCollectionViewDelegate: class {
     func shouldLoadNextPage()
     func lastCellWillDisplay()
     func collectPhoto(flickrId: String, title: String, imageData: Data)
+    func uncollectPhoto(flickerId: String)
 }
 
 class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPhoto> {
     weak var flickrPhotoWallDelegate: SearchResultCollectionViewDelegate?
+    
+    let localPhotoWorker = LocalPhotoWorker.shared
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! PhotoWallCollectionViewCell
@@ -24,7 +27,7 @@ class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPho
         cell.titleLabel.text = flickrPhoto.title
         cell.cellDelegate = self
         
-        if LocalPhotoWorker.shared.allLocalPhotoIds.contains(flickrPhoto.id) {
+        if localPhotoWorker.allLocalPhotoIds.contains(flickrPhoto.id) {
             cell.turnOnFavorite()
         } else {
             cell.turnOffFavorite()
@@ -62,6 +65,10 @@ extension SearchResultCollectionView: PhotoWallCollectionViewCellDelegate {
         
         let flickrPhoto = photos[indexPath.row]
         
-        flickrPhotoWallDelegate?.collectPhoto(flickrId: flickrPhoto.id, title: flickrPhoto.title, imageData: imageData)
+        if localPhotoWorker.allLocalPhotoIds.contains(flickrPhoto.id) {
+            flickrPhotoWallDelegate?.uncollectPhoto(flickerId: flickrPhoto.id)
+        } else {
+            flickrPhotoWallDelegate?.collectPhoto(flickrId: flickrPhoto.id, title: flickrPhoto.title, imageData: imageData)
+        }
     }
 }
