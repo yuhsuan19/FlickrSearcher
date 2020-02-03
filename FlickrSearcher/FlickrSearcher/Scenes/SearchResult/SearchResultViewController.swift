@@ -74,6 +74,11 @@ class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
         loadPhotos()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        collectionView.reloadData()
+    }
+    
     private func setUpAndLayoutViews() {
         title = "搜尋：\(keyword)"
         view.backgroundColor = .systemBackground
@@ -134,8 +139,8 @@ extension SearchResultViewController: SearchResultCollectionViewDelegate {
         interactor?.collectPhoto(request: request)
     }
     
-    func uncollectPhoto(flickerId: String) {
-        let request = SearchResult.UncollectPhoto.Request(flickrId: flickerId)
+    func uncollectPhoto(flickrId: String) {
+        let request = SearchResult.UncollectPhoto.Request(flickrId: flickrId)
         interactor?.uncollectPhoto(request: request)
     }
 }

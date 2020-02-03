@@ -13,7 +13,7 @@ protocol SearchResultCollectionViewDelegate: class {
     func shouldLoadNextPage()
     func lastCellWillDisplay()
     func collectPhoto(flickrId: String, title: String, imageData: Data)
-    func uncollectPhoto(flickerId: String)
+    func uncollectPhoto(flickrId: String)
 }
 
 class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPhoto> {
@@ -56,7 +56,7 @@ class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPho
 }
 
 extension SearchResultCollectionView: PhotoWallCollectionViewCellDelegate {
-    func favoriteButtonDidTapped(in cell: PhotoWallCollectionViewCell) {
+    func functionalButtonDidTapped(in cell: PhotoWallCollectionViewCell) {
         guard let image = cell.imageView.image,
               let imageData = image.jpegData(compressionQuality: 1.0),
               let indexPath = indexPath(for: cell) else {
@@ -66,7 +66,7 @@ extension SearchResultCollectionView: PhotoWallCollectionViewCellDelegate {
         let flickrPhoto = photos[indexPath.row]
         
         if localPhotoWorker.allLocalPhotoIds.contains(flickrPhoto.id) {
-            flickrPhotoWallDelegate?.uncollectPhoto(flickerId: flickrPhoto.id)
+            flickrPhotoWallDelegate?.uncollectPhoto(flickrId: flickrPhoto.id)
         } else {
             flickrPhotoWallDelegate?.collectPhoto(flickrId: flickrPhoto.id, title: flickrPhoto.title, imageData: imageData)
         }

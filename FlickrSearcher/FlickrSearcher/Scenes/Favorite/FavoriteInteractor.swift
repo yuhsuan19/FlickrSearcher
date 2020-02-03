@@ -14,6 +14,8 @@ import UIKit
 
 protocol FavoriteBusinessLogic {
     func fetechLocalPhotos(request: Favorite.FetchLocalPhoto.Request)
+    
+    func uncollectPhoto(request: Favorite.UncollectPhoto.Request)
 }
 
 protocol FavoriteDataStore {
@@ -27,5 +29,12 @@ class FavoriteInteractor: FavoriteBusinessLogic, FavoriteDataStore {
         var response = Favorite.FetchLocalPhoto.Response()
         response.photos = worker.fetchAllLocalPhotos()
         presenter?.presentFetchLocalPhotos(response: response)
+    }
+    
+    func uncollectPhoto(request: Favorite.UncollectPhoto.Request) {
+        worker.deleteLocalPhoto(flickrID: request.flickrId)
+        
+        let response = Favorite.UncollectPhoto.Response()
+        presenter?.presentUncollectPhoto(response: response)
     }
 }

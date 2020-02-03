@@ -24,6 +24,13 @@ enum Favorite {
         }
     }
     
+    enum UncollectPhoto {
+        struct Request {
+            var flickrId: String
+        }
+        struct Response {}
+        struct ViewModel {}
+    }
     
     struct Photo {
         let flickrId: String

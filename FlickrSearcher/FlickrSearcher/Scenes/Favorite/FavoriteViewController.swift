@@ -14,6 +14,8 @@ import UIKit
 
 protocol FavoriteDisplayLogic: class {
     func displayFetchLocalPhotos(viewModel: Favorite.FetchLocalPhoto.ViewModel)
+    
+    func displayUncollectPhoto(viewModel: Favorite.UncollectPhoto.ViewModel)
 }
 
 class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
@@ -23,6 +25,7 @@ class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
     // MARK: User interface elements
     lazy var collectionView: FavoriteCollectioView = {
         let collectionView = FavoriteCollectioView()
+        collectionView.localPhotoDelegate = self
         return collectionView
     }()
 
@@ -79,5 +82,26 @@ class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
     func displayFetchLocalPhotos(viewModel: Favorite.FetchLocalPhoto.ViewModel) {
         collectionView.photos = viewModel.localPhotos
         collectionView.reloadData()
+    }
+    
+    func displayUncollectPhoto(viewModel: Favorite.UncollectPhoto.ViewModel) {
+        let request = Favorite.FetchLocalPhoto.Request()
+        interactor?.fetechLocalPhotos(request: request)
+    }
+}
+
+extension FavoriteViewController: FavoriteCollectioViewDelegate {
+    func deleteFavoritePhoto(with flickrId: String) {
+        let alert = UIAlertController(title: "確定移除最愛？", message: nil, preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "移除", style: .destructive) { [weak self] (_) in
+            let request = Favorite.UncollectPhoto.Request(flickrId: flickrId)
+            self?.interactor?.uncollectPhoto(request: request)
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
 }

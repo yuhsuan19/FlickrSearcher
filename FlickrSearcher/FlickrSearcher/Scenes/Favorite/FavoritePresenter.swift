@@ -14,6 +14,8 @@ import UIKit
 
 protocol FavoritePresentationLogic {
     func presentFetchLocalPhotos(response: Favorite.FetchLocalPhoto.Response)
+    
+    func presentUncollectPhoto(response: Favorite.UncollectPhoto.Response)
 }
 
 class FavoritePresenter: FavoritePresentationLogic {
@@ -30,5 +32,10 @@ class FavoritePresenter: FavoritePresentationLogic {
         }
         
         viewController?.displayFetchLocalPhotos(viewModel: viewModel)
+    }
+    
+    func presentUncollectPhoto(response: Favorite.UncollectPhoto.Response) {
+        let viewModel = Favorite.UncollectPhoto.ViewModel()
+        viewController?.displayUncollectPhoto(viewModel: viewModel)
     }
 }

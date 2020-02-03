@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PhotoWallCollectionViewCellDelegate: class {
-    func favoriteButtonDidTapped(in cell: PhotoWallCollectionViewCell)
+    func functionalButtonDidTapped(in cell: PhotoWallCollectionViewCell)
 }
 
 class PhotoWallCollectionViewCell: UICollectionViewCell {
@@ -21,6 +21,8 @@ class PhotoWallCollectionViewCell: UICollectionViewCell {
     lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -31,16 +33,16 @@ class PhotoWallCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var favoriteImageView: UIImageView = {
+    lazy var functionalImageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    lazy var favoriteButton: UIButton = {
+    lazy var functionalButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(favoriteButtonDidTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(functionalButtonDidTapped), for: .touchUpInside)
         return button
     }()
     
@@ -61,17 +63,17 @@ class PhotoWallCollectionViewCell: UICollectionViewCell {
         imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor).isActive = true
         
-        contentView.addSubview(favoriteImageView)
-        favoriteImageView.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.2).isActive = true
-        favoriteImageView.heightAnchor.constraint(equalTo: favoriteImageView.widthAnchor).isActive = true
-        favoriteImageView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -8).isActive = true
-        favoriteImageView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -8).isActive = true
+        contentView.addSubview(functionalImageView)
+        functionalImageView.widthAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 0.2).isActive = true
+        functionalImageView.heightAnchor.constraint(equalTo: functionalImageView.widthAnchor).isActive = true
+        functionalImageView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -8).isActive = true
+        functionalImageView.trailingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: -8).isActive = true
         
-        contentView.addSubview(favoriteButton)
-        favoriteButton.heightAnchor.constraint(equalTo: favoriteImageView.heightAnchor).isActive = true
-        favoriteButton.widthAnchor.constraint(equalTo: favoriteImageView.widthAnchor).isActive = true
-        favoriteButton.centerXAnchor.constraint(equalTo: favoriteImageView.centerXAnchor).isActive = true
-        favoriteButton.centerYAnchor.constraint(equalTo: favoriteImageView.centerYAnchor).isActive = true
+        contentView.addSubview(functionalButton)
+        functionalButton.heightAnchor.constraint(equalTo: functionalImageView.heightAnchor).isActive = true
+        functionalButton.widthAnchor.constraint(equalTo: functionalImageView.widthAnchor).isActive = true
+        functionalButton.centerXAnchor.constraint(equalTo: functionalImageView.centerXAnchor).isActive = true
+        functionalButton.centerYAnchor.constraint(equalTo: functionalImageView.centerYAnchor).isActive = true
         
         contentView.addSubview(titleLabel)
         titleLabel.leadingAnchor.constraint(equalTo: imageView.leadingAnchor).isActive = true
@@ -81,15 +83,15 @@ class PhotoWallCollectionViewCell: UICollectionViewCell {
     }
     
     func turnOnFavorite() {
-        favoriteImageView.image = UIImage(named: "favorite_on")
+        functionalImageView.image = UIImage(named: "favorite_on")
     }
     
     func turnOffFavorite() {
-        favoriteImageView.image = UIImage(named: "favorite_off")
+        functionalImageView.image = UIImage(named: "favorite_off")
     }
     
     // MARK: User interaction event
-    @objc func favoriteButtonDidTapped() {
-        cellDelegate?.favoriteButtonDidTapped(in: self)
+    @objc func functionalButtonDidTapped() {
+        cellDelegate?.functionalButtonDidTapped(in: self)
     }
 }
