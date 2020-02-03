@@ -17,6 +17,11 @@
 		C2590B9523E2D5440055ADA7 /* PhotoWallCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B9423E2D5440055ADA7 /* PhotoWallCollectionView.swift */; };
 		C2590B9723E2D5600055ADA7 /* PhotoWallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2590B9623E2D5600055ADA7 /* PhotoWallCollectionViewCell.swift */; };
 		C25EB22723E712E300C3A2E6 /* SearchResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25EB22623E712E300C3A2E6 /* SearchResultCollectionView.swift */; };
+		C25EB22F23E7CC5300C3A2E6 /* FavoritePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25EB22923E7CC5300C3A2E6 /* FavoritePresenter.swift */; };
+		C25EB23123E7CC5300C3A2E6 /* FavoriteRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25EB22B23E7CC5300C3A2E6 /* FavoriteRouter.swift */; };
+		C25EB23223E7CC5300C3A2E6 /* FavoriteModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25EB22C23E7CC5300C3A2E6 /* FavoriteModels.swift */; };
+		C25EB23323E7CC5300C3A2E6 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25EB22D23E7CC5300C3A2E6 /* FavoriteViewController.swift */; };
+		C25EB23423E7CC5300C3A2E6 /* FavoriteInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C25EB22E23E7CC5300C3A2E6 /* FavoriteInteractor.swift */; };
 		C2AF0BE923DB46EA00238E37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BE823DB46EA00238E37 /* AppDelegate.swift */; };
 		C2AF0BEB23DB46EA00238E37 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2AF0BEA23DB46EA00238E37 /* SceneDelegate.swift */; };
 		C2AF0BF223DB46EC00238E37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2AF0BF123DB46EC00238E37 /* Assets.xcassets */; };
@@ -45,6 +50,11 @@
 		C2590B9423E2D5440055ADA7 /* PhotoWallCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWallCollectionView.swift; sourceTree = "<group>"; };
 		C2590B9623E2D5600055ADA7 /* PhotoWallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoWallCollectionViewCell.swift; sourceTree = "<group>"; };
 		C25EB22623E712E300C3A2E6 /* SearchResultCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionView.swift; sourceTree = "<group>"; };
+		C25EB22923E7CC5300C3A2E6 /* FavoritePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePresenter.swift; sourceTree = "<group>"; };
+		C25EB22B23E7CC5300C3A2E6 /* FavoriteRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteRouter.swift; sourceTree = "<group>"; };
+		C25EB22C23E7CC5300C3A2E6 /* FavoriteModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModels.swift; sourceTree = "<group>"; };
+		C25EB22D23E7CC5300C3A2E6 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		C25EB22E23E7CC5300C3A2E6 /* FavoriteInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteInteractor.swift; sourceTree = "<group>"; };
 		C2AF0BE523DB46EA00238E37 /* FlickrSearcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSearcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2AF0BE823DB46EA00238E37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C2AF0BEA23DB46EA00238E37 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +129,18 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		C25EB22823E7CC3800C3A2E6 /* Favorite */ = {
+			isa = PBXGroup;
+			children = (
+				C25EB22923E7CC5300C3A2E6 /* FavoritePresenter.swift */,
+				C25EB22B23E7CC5300C3A2E6 /* FavoriteRouter.swift */,
+				C25EB22C23E7CC5300C3A2E6 /* FavoriteModels.swift */,
+				C25EB22D23E7CC5300C3A2E6 /* FavoriteViewController.swift */,
+				C25EB22E23E7CC5300C3A2E6 /* FavoriteInteractor.swift */,
+			);
+			path = Favorite;
+			sourceTree = "<group>";
+		};
 		C2AF0BDC23DB46EA00238E37 = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +179,7 @@
 				C2590B9323E2D51D0055ADA7 /* Views */,
 				C2AF0C0123DC903200238E37 /* Search */,
 				C2590B8423DDD8940055ADA7 /* SearchResult */,
+				C25EB22823E7CC3800C3A2E6 /* Favorite */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -319,6 +342,8 @@
 			files = (
 				C2590B9523E2D5440055ADA7 /* PhotoWallCollectionView.swift in Sources */,
 				C2AF0C0B23DC905300238E37 /* SearchModels.swift in Sources */,
+				C25EB22F23E7CC5300C3A2E6 /* FavoritePresenter.swift in Sources */,
+				C25EB23123E7CC5300C3A2E6 /* FavoriteRouter.swift in Sources */,
 				C2590B8F23DDDBFA0055ADA7 /* SearchResultViewController.swift in Sources */,
 				C2AF0C0A23DC905300238E37 /* SearchRouter.swift in Sources */,
 				C2AF0C0C23DC905300238E37 /* SearchViewController.swift in Sources */,
@@ -335,6 +360,9 @@
 				C2AF0BE923DB46EA00238E37 /* AppDelegate.swift in Sources */,
 				C2AF0C0823DC905300238E37 /* SearchPresenter.swift in Sources */,
 				C2AF0BEB23DB46EA00238E37 /* SceneDelegate.swift in Sources */,
+				C25EB23423E7CC5300C3A2E6 /* FavoriteInteractor.swift in Sources */,
+				C25EB23223E7CC5300C3A2E6 /* FavoriteModels.swift in Sources */,
+				C25EB23323E7CC5300C3A2E6 /* FavoriteViewController.swift in Sources */,
 				C2590B7F23DD9E1D0055ADA7 /* FlickrAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
