@@ -15,12 +15,14 @@ protocol SearchResultCollectionViewDelegate: class {
 }
 
 class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPhoto> {
-    weak var lazyLoadingDelegate: SearchResultCollectionViewDelegate?
+    weak var flickrPhotoWallDelegate: SearchResultCollectionViewDelegate?
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! PhotoWallCollectionViewCell
         let flickrPhoto = photos[indexPath.row]
         cell.titleLabel.text = flickrPhoto.title
+        cell.turnOffFavorite()
+        cell.cellDelegate = self
         return cell
     }
     
@@ -34,11 +36,17 @@ class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPho
         cell.imageView.kf.setImage(with: resource)
         
         if photos.count - indexPath.row <= 10 {
-            lazyLoadingDelegate?.shouldLoadNextPage()
+            flickrPhotoWallDelegate?.shouldLoadNextPage()
         }
         
         if indexPath.row == photos.count - 1 {
-            lazyLoadingDelegate?.lastCellWillDisplay()
+            flickrPhotoWallDelegate?.lastCellWillDisplay()
         }
+    }
+}
+
+extension SearchResultCollectionView: PhotoWallCollectionViewCellDelegate {
+    func favoriteButtonDidTapped(in cell: PhotoWallCollectionViewCell) {
+        print(indexPath(for: cell))
     }
 }

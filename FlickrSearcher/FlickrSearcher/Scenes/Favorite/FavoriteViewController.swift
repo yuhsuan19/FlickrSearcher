@@ -47,7 +47,12 @@ class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
     // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpAndLayoutViews()
     }
     
+    private func setUpAndLayoutViews() {
+        title = "我的最愛"
+        view.backgroundColor = .systemBackground
+    }
     
 }

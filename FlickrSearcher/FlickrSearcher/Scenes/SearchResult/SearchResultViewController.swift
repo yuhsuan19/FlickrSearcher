@@ -28,7 +28,7 @@ class SearchResultViewController: UIViewController, SearchResultDisplayLogic {
     // MARK: User interface elements
     lazy var collectionView: SearchResultCollectionView = {
         let collectionView = SearchResultCollectionView()
-        collectionView.lazyLoadingDelegate = self
+        collectionView.flickrPhotoWallDelegate = self
         return collectionView
     }()
     
@@ -112,7 +112,7 @@ extension SearchResultViewController: SearchResultCollectionViewDelegate {
     
     func lastCellWillDisplay() {
         if isLoadingPhotos {
-            HUD.show(.labeledProgress(title: nil, subtitle: "讀取中..."))
+            HUD.show(.labeledProgress(title: nil, subtitle: "加載更多..."))
         }
     }
 }

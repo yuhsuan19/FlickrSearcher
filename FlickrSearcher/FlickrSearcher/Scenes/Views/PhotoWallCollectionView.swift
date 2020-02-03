@@ -7,7 +7,6 @@
 //
 
 import UIKit
-// import Kingfisher
 
 class PhotoWallCollectionView<Photo>: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource {
     

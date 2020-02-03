@@ -55,8 +55,16 @@ extension SceneDelegate {
     private func configureRootViewController() -> UIViewController {
         let tabBarController = UITabBarController()
         let searchNavigationController = UINavigationController(rootViewController: SearchViewController())
-        tabBarController.viewControllers = [searchNavigationController]
         
+        let favoriteNavigationController = UINavigationController(rootViewController: FavoriteViewController())
+        
+        tabBarController.viewControllers = [searchNavigationController, favoriteNavigationController]
+        
+        tabBarController.tabBar.items?[0].image = UIImage(named: "tabBar_search")
+        tabBarController.tabBar.items?[0].title = "輸入搜尋"
+        tabBarController.tabBar.items?[1].image = UIImage(named: "tabBar_favorite")
+        tabBarController.tabBar.items?[1].title = "我的最愛"
+
         return tabBarController
     }
 }

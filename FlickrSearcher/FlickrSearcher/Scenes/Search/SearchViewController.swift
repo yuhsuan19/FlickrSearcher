@@ -91,7 +91,6 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
     private func setUpAndLayoutViews() {
         title = "輸入搜尋"
         view.backgroundColor = .systemBackground
-        navigationController?.tabBarController?.tabBar.items?[0].image = UIImage(named: "tabBar_search")
         
         let stackView = UIStackView(frame: .zero)
         stackView.translatesAutoresizingMaskIntoConstraints = false

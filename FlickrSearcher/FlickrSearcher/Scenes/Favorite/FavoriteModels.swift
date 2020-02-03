@@ -14,4 +14,8 @@ import UIKit
 
 enum Favorite {
     // MARK: Use cases
+    
+    struct Photo {
+        
+    }
 }
