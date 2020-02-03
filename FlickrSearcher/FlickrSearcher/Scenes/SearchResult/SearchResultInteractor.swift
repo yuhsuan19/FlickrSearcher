@@ -15,6 +15,7 @@ import SwiftyJSON
 
 protocol SearchResultBusinessLogic {
     func loadPhotos(request: SearchResult.LoadPhotos.Request)
+    func collectPhoto(request: SearchResult.CollectPhoto.Request)
 }
 
 protocol SearchResultDataStore {
@@ -24,7 +25,8 @@ protocol SearchResultDataStore {
 
 class SearchResultInteractor: SearchResultBusinessLogic, SearchResultDataStore {
     var presenter: SearchResultPresentationLogic?
-    var worker = FlickrAPIWorker()
+    var flickrAPIWorker = FlickrAPIWorker()
+    var localPhotoWorker = LocalPhotoWorker.shared
 
     var keyword: String
     var countPerPage: Int
@@ -39,7 +41,7 @@ class SearchResultInteractor: SearchResultBusinessLogic, SearchResultDataStore {
         currentPage += 1
         
         var response = SearchResult.LoadPhotos.Response()
-        worker.search(with: keyword, perpageCount: countPerPage, page: currentPage) { [weak self] (result) in
+        flickrAPIWorker.search(with: keyword, perpageCount: countPerPage, page: currentPage) { [weak self] (result) in
             switch result {
             case .success(let responseData):
                 guard let parsedDic = responseData as? [String: Any],
@@ -59,5 +61,9 @@ class SearchResultInteractor: SearchResultBusinessLogic, SearchResultDataStore {
                 break
             }
         }
+    }
+    
+    func collectPhoto(request: SearchResult.CollectPhoto.Request) {
+        localPhotoWorker.newLocalPhoto(flickrID: request.id, title: request.title, imageData: request.imageData)
     }
 }

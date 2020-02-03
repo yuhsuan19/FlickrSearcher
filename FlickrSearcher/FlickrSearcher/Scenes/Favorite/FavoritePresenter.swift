@@ -13,8 +13,22 @@
 import UIKit
 
 protocol FavoritePresentationLogic {
+    func presentFetchLocalPhotos(response: Favorite.FetchLocalPhoto.Response)
 }
 
 class FavoritePresenter: FavoritePresentationLogic {
     weak var viewController: FavoriteDisplayLogic?
+    
+    func presentFetchLocalPhotos(response: Favorite.FetchLocalPhoto.Response) {
+        var viewModel = Favorite.FetchLocalPhoto.ViewModel()
+        for dictionary in response.photos {
+            if let title = dictionary["title"] as? String,
+               let id = dictionary["flickrId"] as? String,
+               let data = dictionary["imageData"] as? Data {
+                viewModel.localPhotos.append(Favorite.Photo(flickrId: id, title: title, imageData: data))
+            }
+        }
+        
+        viewController?.displayFetchLocalPhotos(viewModel: viewModel)
+    }
 }

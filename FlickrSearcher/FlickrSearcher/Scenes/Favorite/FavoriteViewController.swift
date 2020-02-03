@@ -13,11 +13,18 @@
 import UIKit
 
 protocol FavoriteDisplayLogic: class {
+    func displayFetchLocalPhotos(viewModel: Favorite.FetchLocalPhoto.ViewModel)
 }
 
 class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
     var interactor: FavoriteBusinessLogic?
     var router: (NSObjectProtocol & FavoriteRoutingLogic & FavoriteDataPassing)?
+
+    // MARK: User interface elements
+    lazy var collectionView: FavoriteCollectioView = {
+        let collectionView = FavoriteCollectioView()
+        return collectionView
+    }()
 
     // MARK: Object lifecycle
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -50,9 +57,27 @@ class FavoriteViewController: UIViewController, FavoriteDisplayLogic {
         setUpAndLayoutViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let request = Favorite.FetchLocalPhoto.Request()
+        interactor?.fetechLocalPhotos(request: request)
+    }
+    
     private func setUpAndLayoutViews() {
         title = "我的最愛"
         view.backgroundColor = .systemBackground
+        
+        view.addSubview(collectionView)
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
+    // MARK: Display logic
+    func displayFetchLocalPhotos(viewModel: Favorite.FetchLocalPhoto.ViewModel) {
+        collectionView.photos = viewModel.localPhotos
+        collectionView.reloadData()
+    }
 }

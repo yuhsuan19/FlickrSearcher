@@ -29,6 +29,14 @@ enum SearchResult {
         }
     }
     
+    enum CollectPhoto {
+        struct Request {
+            var imageData: Data
+            var title: String
+            var id: String
+        }
+    }
+    
     struct FlickrPhoto {
         let id: String
         let server: String

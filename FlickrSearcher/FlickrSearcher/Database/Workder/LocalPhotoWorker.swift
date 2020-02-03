@@ -12,26 +12,39 @@ import CouchbaseLiteSwift
 class LocalPhotoWorker {
     static let shared = LocalPhotoWorker()
     
-    func newLocalPhoto(flickrID: String, title: String) {
+    func newLocalPhoto(flickrID: String, title: String, imageData: Data) {
         var newLocalPhoto = LocalPhotoModel()
         newLocalPhoto.flickrId = flickrID
         newLocalPhoto.title = title
+        newLocalPhoto.imageData = imageData
         newLocalPhoto.saved()
     }
     
-    func fetchAllLocalPhotos() {
+    func fetchAllLocalPhotos() -> [[String: Any]] {
         let query = QueryBuilder
-            .select(SelectResult.all())
+            .select(SelectResult.property("title"),
+                    SelectResult.property("flickrId"),
+                    SelectResult.property("image"))
             .from(DataSource.database(CouchbaseDBManager.shared.database))
             .where(Expression.property("type")
-                .equalTo(Expression.string("local_photo")))
+                .equalTo(Expression.string(LocalPhotoModel.type)))
         
         do {
+            var output: [[String: Any]] = []
             for result in try query.execute() {
-                print(result.toDictionary())
+                if let title = result.string(forKey: "title"),
+                   let flickrId = result.string(forKey: "flickrId"),
+                   let imageData = result.blob(forKey: "image")?.content {
+                    output.append([
+                        "title": title,
+                        "flickrId": flickrId,
+                        "imageData": imageData
+                    ])
+                }
             }
+            return output
         } catch {
-            print("error")
+            fatalError("Error fetching local photos")
         }
     }
 }

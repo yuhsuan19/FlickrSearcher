@@ -115,4 +115,9 @@ extension SearchResultViewController: SearchResultCollectionViewDelegate {
             HUD.show(.labeledProgress(title: nil, subtitle: "加載更多..."))
         }
     }
+    
+    func collectPhoto(flickrId: String, title: String, imageData: Data) {
+        let request = SearchResult.CollectPhoto.Request(imageData: imageData, title: title, id: flickrId)
+        interactor?.collectPhoto(request: request)
+    }
 }

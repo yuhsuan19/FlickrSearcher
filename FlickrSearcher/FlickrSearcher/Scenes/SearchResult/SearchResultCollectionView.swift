@@ -12,6 +12,7 @@ import Kingfisher
 protocol SearchResultCollectionViewDelegate: class {
     func shouldLoadNextPage()
     func lastCellWillDisplay()
+    func collectPhoto(flickrId: String, title: String, imageData: Data)
 }
 
 class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPhoto> {
@@ -47,6 +48,14 @@ class SearchResultCollectionView: PhotoWallCollectionView<SearchResult.FlickrPho
 
 extension SearchResultCollectionView: PhotoWallCollectionViewCellDelegate {
     func favoriteButtonDidTapped(in cell: PhotoWallCollectionViewCell) {
-        print(indexPath(for: cell))
+        guard let image = cell.imageView.image,
+              let imageData = image.jpegData(compressionQuality: 1.0),
+              let indexPath = indexPath(for: cell) else {
+            return
+        }
+        
+        let flickrPhoto = photos[indexPath.row]
+        
+        flickrPhotoWallDelegate?.collectPhoto(flickrId: flickrPhoto.id, title: flickrPhoto.title, imageData: imageData)
     }
 }

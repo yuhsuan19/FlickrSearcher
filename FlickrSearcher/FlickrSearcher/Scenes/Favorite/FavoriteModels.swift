@@ -14,8 +14,26 @@ import UIKit
 
 enum Favorite {
     // MARK: Use cases
+    enum FetchLocalPhoto {
+        struct Request {}
+        struct Response {
+            var photos: [[String: Any]] = []
+        }
+        struct ViewModel{
+            var localPhotos: [Photo] = []
+        }
+    }
+    
     
     struct Photo {
+        let flickrId: String
+        let title: String
+        let image: UIImage?
         
+        init(flickrId: String, title: String, imageData: Data) {
+            self.flickrId = flickrId
+            self.title = title
+            self.image = UIImage(data: imageData)
+        }
     }
 }

@@ -13,6 +13,7 @@
 import UIKit
 
 protocol FavoriteBusinessLogic {
+    func fetechLocalPhotos(request: Favorite.FetchLocalPhoto.Request)
 }
 
 protocol FavoriteDataStore {
@@ -20,4 +21,11 @@ protocol FavoriteDataStore {
 
 class FavoriteInteractor: FavoriteBusinessLogic, FavoriteDataStore {
     var presenter: FavoritePresentationLogic?
+    var worker = LocalPhotoWorker.shared
+    
+    func fetechLocalPhotos(request: Favorite.FetchLocalPhoto.Request) {
+        var response = Favorite.FetchLocalPhoto.Response()
+        response.photos = worker.fetchAllLocalPhotos()
+        presenter?.presentFetchLocalPhotos(response: response)
+    }
 }
