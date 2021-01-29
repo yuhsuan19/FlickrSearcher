@@ -1,2 +1,2 @@
 # FlickrSearcher
-Pre-Test of Allied Jubilee Pre-Test
+Pre-Test of Allied Jubilee
